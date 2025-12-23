@@ -17,32 +17,55 @@ This project implements an **Agentic Documentation Swarm**—a coordinated team 
 The process is orchestrated by a central manager agent that dispatches specialized workers in a strict linear pipeline. This ensures that downstream agents always have validated context from upstream analysis.
 
 ```mermaid
-graph TD
-    User((User)) -->|Triggers| Orch[**Readme Orchestrator**<br/>(Manager)]
+    graph TD
+    %% Theme Definitions - Nordic Slate
+    classDef manager fill:#2c323a,stroke:#62aeb7,stroke-width:3px,color:#f4f7f6
+    classDef worker fill:#395671,stroke:#f4f7f6,stroke-width:2px,color:#f4f7f6
+    classDef artifact fill:#f4f7f6,stroke:#748590,stroke-width:2px,stroke-dasharray: 5 5,color:#2c323a
+    classDef user fill:#62aeb7,stroke:#fff,stroke-width:2px,color:#fff
+    linkStyle default stroke:#748590,stroke-width:2px
+
+    User((User)) -->|Triggers| Orch["**Readme Orchestrator**<br/>(Manager)"]
     
     subgraph "Phase 1: Context & Fact Finding"
-        Orch -->|Handoff| Forensics[**Forensics Engineer**<br/>(Analyst)]
+        direction TB
+        Orch -->|Handoff| Forensics["**Forensics Engineer**<br/>(Analyst)"]
         Forensics -->|Generates| Brief[Technical Brief]
     end
 
     subgraph "Phase 2: Validation"
-        Brief --> QA[**Quality Analyst**<br/>(Auditor)]
+        direction TB
+        Brief --> QA["**Quality Analyst**<br/>(Auditor)"]
         QA -->|Generates| Report[Validation Report]
     end
 
     subgraph "Phase 3: Execution & Generation"
-        Report --> DX[**DX Architect**<br/>(Writer)]
+        direction TB
+        Report --> DX["**DX Architect**<br/>(Writer)"]
         DX -->|Generates| README[docs/README.md]
         DX -->|Generates| TODO[TODO.md]
         
-        README --> WikiExp[**Wiki Content Expander**<br/>(Tech Writer)]
+        README --> WikiExp["**Wiki Content Expander**<br/>(Tech Writer)"]
         Brief --> WikiExp
         WikiExp -->|Populates| Wiki[WIKI/*.md]
     end
 
-    style Orch fill:#f9f,stroke:#333,stroke-width:2px
-    style README fill:#bbf,stroke:#333,stroke-width:2px
-    style Wiki fill:#bbf,stroke:#333,stroke-width:2px
+    %% Apply Styles
+    class Orch manager
+    class Forensics,QA,DX,WikiExp worker
+    class Brief,Report,README,TODO,Wiki artifact
+    class User user
+    
+    %% Global Styling
+    linkStyle default stroke:#7e8590,stroke-width:1px
+```
+
+### Initial Prompt
+```
+@readme-orchestrator Initialize the documentation generation workflow. 
+1. Create the `.agent-context/` directory if it doesn't exist.
+2. Analyze the repository to determine if we are in "Greenfield" (New) or "Brownfield" (Migration) mode.
+3. Hand off the technical analysis to the @readme-forensics-engineer.
 ```
 
 ---
@@ -96,6 +119,9 @@ The system relies on a **"Context Waterfall"** approach where information is ref
 
 ```mermaid
 sequenceDiagram
+    %% Nordic Slate Theme Config
+    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#395671', 'primaryTextColor': '#f4f7f6', 'edgeLabelBackground':'#2c323a', 'actorBorder': '#62aeb7', 'actorBkg': '#2c323a', 'signalColor': '#748590', 'signalTextColor': '#f4f7f6', 'textColor': '#f4f7f6', 'mainBkg': '#2c323a', 'sequenceNumberColor': '#62aeb7', 'activationBorderColor': '#62aeb7'}}}%%
+    
     participant Repo as Codebase
     participant Forensics as Forensics Agent
     participant Context as .agent-context/
