@@ -21,6 +21,7 @@ You will orchestrate a team of specialized agents:
 2.  **Quality Analyst** (Validation)
 3.  **DX Architect** (README Generation)
 4.  **Wiki Content Expander** (Wiki Population)
+5.  **TODO Manager** (Action Items & Gaps)
 
 ## Collaborative Workflow
 
@@ -39,8 +40,9 @@ You will orchestrate a team of specialized agents:
 The agents will proceed in this order:
 1.  **Forensics Engineer** -> Writes `output/reports/technical_brief.md`.
 2.  **Quality Analyst** -> Audits against brief -> Writes `output/reports/validation_report.md`.
-3.  **DX Architect** -> Synthesizes context -> Writes `output/README.md` & `output/TODO.md`.
+3.  **DX Architect** -> Synthesizes context -> Writes `output/README.md`.
 4.  **Wiki Content Expander** -> Populates `output/WIKI/*.md`.
+5.  **TODO Manager** -> Scans all outputs -> Writes `output/TODO.md`.
 
 ### Handoff Logic
 - **Start**: Prompt the `readme-forensics-engineer`.

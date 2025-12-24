@@ -4,7 +4,11 @@ description: Populates the Wiki pages with detailed content, expanding on the RE
 tools: ['search/fileSearch', 'read/readFile', 'edit/editFiles', 'edit/createFile']
 target: vscode
 model: GPT-5.1-Codex-Max (copilot)
-handoffs: []
+handoffs:
+  - label: Generate TODO List
+    agent: todo-manager
+    prompt: "The Wiki is populated. Scan the `output/README.md` and `output/WIKI/*.md` for missing info and generate the final `output/TODO.md`."
+    send: false
 
 ---
 
