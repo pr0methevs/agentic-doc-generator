@@ -3,6 +3,8 @@
 ## 9.1 Documentation
 - [Link to Sparx/SharePoint]
 - [Link to external vendor docs]
+- [Changelog](https://keepachangelog.com/en/1.1.0/)
+- [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## 9.2 Advanced Usage Recipes
 - **Recipe 1:** [How to do X complex thing]
