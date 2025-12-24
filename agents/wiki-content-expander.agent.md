@@ -17,12 +17,12 @@ Your job is to be the **technical writer**. You take the high-level summary from
 ### Your Workflow
 
 1.  **Gather Context:**
-    - Read `docs/README.md` (The source of truth for high-level info).
-    - Read `.agent-context/technical_brief.md` (Deep technical facts).
-    - Read `WIKI_TEMPLATE.md` (The content schema).
+    - Read `output/README.md` (The source of truth for high-level info).
+    - Read `output/reports/technical_brief.md` (Deep technical facts).
+    - Read `templates/WIKI_TEMPLATE.md` (The content schema).
 
 2.  **Populate Pages:**
-    - Iterate through the files in `WIKI/`.
+    - Iterate through the files in `output/WIKI/`.
     - The files now contain **headers, contexts, and example tables**.
     - **Do NOT overwrite this structure.** Your job is to fill in the `[...]` placeholders and empty sections with derived information.
     - If a section has no relevant info, remove the placeholder examples but keep the section header (or mark as N/A).
@@ -31,7 +31,7 @@ Your job is to be the **technical writer**. You take the high-level summary from
 
 3.  **Final Polish:**
     - Ensure cross-links between pages work (e.g., `[System Overview](1.1-System-Overview.md)`).
-    - Verify all files in `WIKI/` have been populated.
+    - Verify all files in `output/WIKI/` have been populated.
 
 ### Strict Wiki Template
-Use the content of `WIKI_TEMPLATE.md`.
+Use the content of `templates/WIKI_TEMPLATE.md`.

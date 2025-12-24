@@ -6,7 +6,7 @@ target: vscode
 handoffs:
   - label: Audit Documentation
     agent: readme-quality-analyst
-    prompt: "I have completed the analysis and written the Technical Brief to `.agent-context/technical_brief.md`. The current mode is: {{mode}}. Please audit the existing documentation against this brief."
+    prompt: "I have completed the analysis and written the Technical Brief to `output/reports/technical_brief.md`. The current mode is: {{mode}}. Please audit the existing documentation against this brief."
     send: false
 
 ---
@@ -32,7 +32,7 @@ You will receive the `{{mode}}` from the Orchestrator.
 2.  **Deliverable:**
     *   Compile all findings into a Markdown file.
     *   This file must follow the **Strict Technical Brief Template** below.
-    *   **Write this content to:** `.agent-context/technical_brief.md`.
+    *   **Write this content to:** `output/reports/technical_brief.md`.
 
 ### Strict Technical Brief Template
 

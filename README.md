@@ -42,12 +42,12 @@ The process is orchestrated by a central manager agent that dispatches specializ
     subgraph "Phase 3: Execution & Generation"
         direction TB
         Report --> DX["**DX Architect**<br/>(Writer)"]
-        DX -->|Generates| README[docs/README.md]
-        DX -->|Generates| TODO[TODO.md]
+        DX -->|Generates| README[output/README.md]
+        DX -->|Generates| TODO[output/TODO.md]
         
         README --> WikiExp["**Wiki Content Expander**<br/>(Tech Writer)"]
         Brief --> WikiExp
-        WikiExp -->|Populates| Wiki[WIKI/*.md]
+        WikiExp -->|Populates| Wiki[output/WIKI/*.md]
     end
 
     %% Apply Styles
@@ -63,7 +63,7 @@ The process is orchestrated by a central manager agent that dispatches specializ
 ### Initial Prompt
 ```
 @readme-orchestrator Initialize the documentation generation workflow. 
-1. Create the `.agent-context/` directory if it doesn't exist.
+1. Create the `output/` directories.
 2. Analyze the repository to determine if we are in "Greenfield" (New) or "Brownfield" (Migration) mode.
 3. Hand off the technical analysis to the @readme-forensics-engineer.
 ```
@@ -77,7 +77,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
 ### 1. `readme-orchestrator` (The Project Manager)
 *   **Role:** Workflow orchestration and state management.
 *   **Responsibility:**
-    *   Initializes the `.agent-context/` workspace.
+    *   Initializes the `output/` workspaces.
     *   Determines if the project is in "Greenfield" (Generation) or "Brownfield" (Migration) mode.
     *   Manages handoffs between agents to prevent context loss.
 
@@ -85,7 +85,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
 *   **Role:** Deep code analysis and fact extraction.
 *   **Responsibility:**
     *   Scans the entire repository to understand the tech stack, implementation details, and hidden logic.
-    *   **Output:** `.agent-context/technical_brief.md` (Raw, unstructured technical facts).
+    *   **Output:** `output/reports/technical_brief.md` (Raw, unstructured technical facts).
     *   *Note: This agent does not write user-facing text; it only extracts truth.*
 
 ### 3. `readme-quality-analyst` (The Auditor)
@@ -93,7 +93,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
 *   **Responsibility:**
     *   Reviews the `technical_brief.md` against the codebase to ensure no hallucinations.
     *   Identifies missing sections or ambitious claims.
-    *   **Output:** `.agent-context/validation_report.md` (A "pass/fail" report for the brief).
+    *   **Output:** `output/reports/validation_report.md` (A "pass/fail" report for the brief).
 
 ### 4. `readme-dx-architect` (The Technical Writer co. "DevRel")
 *   **Role:** Synthesis and user-facing documentation.
@@ -101,7 +101,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
     *   Consumes the validated facts.
     *   Applies the `README_TEMPLATE.md` to ensure consistent formatting.
     *   Writes the "Selling Pitch" and "Getting Started" guides.
-    *   **Output:** `docs/README.md` and `TODO.md`.
+    *   **Output:** `output/README.md` and `output/TODO.md`.
 
 ### 5. `wiki-content-expander` (The Operations Specialist)
 *   **Role:** Detailed operational documentation.
@@ -109,7 +109,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
     *   Takes the high-level concepts from the README.
     *   Expands them into deep-dive articles in the `WIKI/` directory.
     *   Fills in structure templates with specific configuration, API details, and deployment steps.
-    *   **Output:** Fully populated `WIKI/` directory (e.g., `1.1-System-Overview.md`, `4.1-API-Endpoints.md`).
+    *   **Output:** Fully populated `output/WIKI/` directory (e.g., `1.1-System-Overview.md`, `output/WIKI/4.1-API-Endpoints.md`).
 
 ---
 
@@ -124,7 +124,7 @@ sequenceDiagram
     
     participant Repo as Codebase
     participant Forensics as Forensics Agent
-    participant Context as .agent-context/
+    participant Context as output/reports/
     participant DX as DX Architect Agent
     participant Docs as Final Docs
 
@@ -146,7 +146,7 @@ sequenceDiagram
 
 ## 5. Technical Implementation Details
 
-*   **Context Storage:** All intermediate state is stored in `.agent-context/`. This allow agents to "pass the baton" without needing massive context windows to remember the entire conversation history.
+*   **Context Storage:** detailed reports are stored in `output/reports/`. This allow agents to "pass the baton" without needing massive context windows to remember the entire conversation history.
 *   **Idempotency:** The Wiki Expander is designed to be safe to run multiple times; it looks for placeholders to fill rather than overwriting custom changes.
 *   **Templates:**
     *   `README_TEMPLATE.md`: Enforces structure for the main entry point.

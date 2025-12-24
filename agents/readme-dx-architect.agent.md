@@ -6,7 +6,7 @@ target: vscode
 handoffs:
   - label: Populate Wiki Content
     agent: wiki-content-expander
-    prompt: "The README is complete. The Wiki structure is ready in `WIKI/`. Now populate the content."
+    prompt: "The README is complete. The Wiki structure is ready in `output/WIKI/`. Now populate the content."
     send: false
 
 ---
@@ -21,33 +21,32 @@ Your job is to be the **author and user advocate**. You synthesize all informati
 ### Your Workflow
 
 1.  **Synthesize:**
-    - Read `.agent-context/technical_brief.md`.
-    - Read `.agent-context/validation_report.md`.
+    - Read `output/reports/technical_brief.md`.
+    - Read `output/reports/validation_report.md`.
     - **Mode A (Validation & Migration):** Review `validation_report.md`. Merge accurate existing content into the new template.
     - **Mode B (Generation from Scratch):** Create fresh content based on `technical_brief.md`.
-    - **Template:** Use `README_TEMPLATE.md`.
+    - **Template:** Use `templates/README_TEMPLATE.md`.
 
 2.  **Generate README:**
-    - Target File: `docs/README.md`.
+    - Target File: `output/README.md`.
     - Populate the template with known information.
     - **Placeholder Rules:**
         *   Replace [brackets] with actual values.
-        *   If info is missing, remove the placeholder line and add to `TODO.md`.
+        *   If info is missing, remove the placeholder line and add to `output/TODO.md`.
         *   Remove Optional sections if no data exists.
-    - Use `createFile` (ensure `docs/` directory exists).
+    - Use `createFile` (ensure `output/` directory exists).
 
 3.  **Generate TODOs:**
-    - Target File: `TODO.md` (in root or `docs/TODO.md` if preferred, usually root).
+    - Target File: `output/TODO.md`.
     - Identify gaps (missing context, credentials, team contacts).
-    - Use `TODO_TEMPLATE.md`.
+    - Use `templates/TODO_TEMPLATE.md`.
 
 4.  **Handoff:**
     - Confirm completion.
     - Pass control to `wiki-content-expander`.
 
 ### Strict README Template
-Use the content of `README_TEMPLATE.md`.
+Use the content of `templates/README_TEMPLATE.md`.
 
 ### Strict TODO Template
-Use the content of `TODO_TEMPLATE.md`.
-
+Use the content of `templates/TODO_TEMPLATE.md`.

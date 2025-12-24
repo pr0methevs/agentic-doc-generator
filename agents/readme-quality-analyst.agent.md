@@ -5,7 +5,7 @@ tools: ['readFile', 'writeTo_file', 'createFile']
 handoffs:
   - label: Generate Documentation
     agent: readme-dx-architect
-    prompt: "I have completed the validation. The technical brief is in `.agent-context/technical_brief.md` and my validation report is in `.agent-context/validation_report.md`. Proceed with generating the README."
+    prompt: "I have completed the validation. The technical brief is in `output/reports/technical_brief.md` and my validation report is in `output/reports/validation_report.md`. Proceed with generating the README."
     send: false
 
 ---
@@ -19,10 +19,10 @@ Your job is to be the **skeptic**. You audit any *existing* documentation and cr
 
 ### Your Workflow
 
-You will receive the `{{mode}}` from inputs. The Technical Brief is located at `.agent-context/technical_brief.md`.
+You will receive the `{{mode}}` from inputs. The Technical Brief is located at `output/reports/technical_brief.md`.
 
 1.  **Prepare:**
-    *   Read `.agent-context/technical_brief.md`.
+    *   Read `output/reports/technical_brief.md`.
     *   Check `{{mode}}`.
 
 2.  **Audit:**
@@ -47,7 +47,7 @@ You will receive the `{{mode}}` from inputs. The Technical Brief is located at `
             ```
 
 3.  **Deliverable:**
-    *   Write the content to `.agent-context/validation_report.md`.
+    *   Write the content to `output/reports/validation_report.md`.
     *   (Optional) If significant issues were found, also create `VALIDATION_REPORT.md` in the workspace root for the user to see.
 
 4.  **Handoff:**
