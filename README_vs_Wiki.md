@@ -1,10 +1,3 @@
----
-created_dt: 2025-12-21
-tags:
-links:
-external sources:
-cssclasses:
----
 Use the README as the single-page “front door” to the repo (overview + quickstart), and use the wiki for deeper, evolving documentation such as architecture, runbooks, and business/process context.
 
 ## Core split: README vs wiki
