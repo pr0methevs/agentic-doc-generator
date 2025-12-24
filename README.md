@@ -43,16 +43,19 @@ The process is orchestrated by a central manager agent that dispatches specializ
         direction TB
         Report --> DX["**DX Architect**<br/>(Writer)"]
         DX -->|Generates| README[output/README.md]
-        DX -->|Generates| TODO[output/TODO.md]
         
         README --> WikiExp["**Wiki Content Expander**<br/>(Tech Writer)"]
         Brief --> WikiExp
         WikiExp -->|Populates| Wiki[output/WIKI/*.md]
+
+        Wiki --> TodoMgr["**Todo Manager**<br/>(Auditor)"]
+        README --> TodoMgr
+        TodoMgr -->|Generates| TODO[output/TODO.md]
     end
 
     %% Apply Styles
     class Orch manager
-    class Forensics,QA,DX,WikiExp worker
+    class Forensics,QA,DX,WikiExp,TodoMgr worker
     class Brief,Report,README,TODO,Wiki artifact
     class User user
     
@@ -101,7 +104,7 @@ Each agent in this pipeline mimics a specific real-world role within a software 
     *   Consumes the validated facts.
     *   Applies the `README_TEMPLATE.md` to ensure consistent formatting.
     *   Writes the "Selling Pitch" and "Getting Started" guides.
-    *   **Output:** `output/README.md` and `output/TODO.md`.
+    *   **Output:** `output/README.md`.
 
 ### 5. `wiki-content-expander` (The Operations Specialist)
 *   **Role:** Detailed operational documentation.
@@ -110,6 +113,14 @@ Each agent in this pipeline mimics a specific real-world role within a software 
     *   Expands them into deep-dive articles in the `WIKI/` directory.
     *   Fills in structure templates with specific configuration, API details, and deployment steps.
     *   **Output:** Fully populated `output/WIKI/` directory (e.g., `1.1-System-Overview.md`, `output/WIKI/4.1-API-Endpoints.md`).
+
+### 6. `todo-manager` (The Project Auditor)
+*   **Role:** Final gap analysis and action planning.
+*   **Responsibility:**
+    *   Scans the now-complete `README.md` and `WIKI/` files.
+    *   Identifies every single missing piece of information, placeholder, or "TBD".
+    *   Consolidates them into a prioritized list for the human user.
+    *   **Output:** `output/TODO.md`.
 
 ---
 
@@ -126,6 +137,8 @@ sequenceDiagram
     participant Forensics as Forensics Agent
     participant Context as output/reports/
     participant DX as DX Architect Agent
+    participant WikiExp as Wiki Agent
+    participant TodoMgr as TODO Manager
     participant Docs as Final Docs
 
     Note over Forensics: Phase 1: Exploration
@@ -140,6 +153,10 @@ sequenceDiagram
     Note over DX, Docs: Phase 3: Expansion
     DX->>Docs: Read README.md (Source of Truth)
     DX->>Docs: Populate WIKI/ templates
+
+    Note over TodoMgr, Docs: Phase 4: Audit
+    TodoMgr->>Docs: Scan README & WIKI
+    TodoMgr->>Docs: Generate TODO.md
 ```
 
 ---
