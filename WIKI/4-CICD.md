@@ -3,9 +3,9 @@
 ## 4.1 Github Actions
 **Context:** Workflow automation.
 
-| Workflow | File | Purpose | Parameters |
-| -------- | ---- | ------- | ---------- |
-| [Name] | `.github/workflows/[file].yml` | [Description] | `[inputs.name]` |
+| Workflow | Status | File | Purpose | Parameters |
+| -------- | ------ | ---- | ------- | ---------- |
+| [Name] | [available / in-progress / not-available] | `.github/workflows/[file].yml` | [Description] | `[inputs.name]` |
 
 ## 4.2 Azure Key Vaults
 **Context:** Vaults accessed during the build process.
