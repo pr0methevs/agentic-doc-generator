@@ -1,8 +1,9 @@
 ---
 name: readme-forensics-engineer
 description: Analyzes repository code and config files to extract objective technical facts.
-tools: ['codebase', 'fileSearch', 'readFile', 'writeTo_file']
+tools: ['search/codebase', 'search/fileSearch', 'read/readFile', 'edit/createFile']
 target: vscode
+model: GPT-5.1-Codex-Max (copilot)
 handoffs:
   - label: Audit Documentation
     agent: readme-quality-analyst

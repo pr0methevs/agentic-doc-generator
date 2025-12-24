@@ -1,7 +1,9 @@
 ---
 name: readme-quality-analyst
 description: Audits existing documentation against repository facts for accuracy.
-tools: ['readFile', 'writeTo_file', 'createFile']
+tools: ['read/readFile', 'edit/editFiles', 'search/codebase', 'search/fileSearch']
+target: vscode
+model: GPT-5.1-Codex-Max (copilot)
 handoffs:
   - label: Generate Documentation
     agent: readme-dx-architect

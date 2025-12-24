@@ -1,8 +1,9 @@
 ---
 name: wiki-content-expander
 description: Populates the Wiki pages with detailed content, expanding on the README.
-tools: ['readFile', 'editFiles']
+tools: ['search/fileSearch', 'read/readFile', 'edit/editFiles', 'edit/createFile']
 target: vscode
+model: GPT-5.1-Codex-Max (copilot)
 handoffs: []
 
 ---

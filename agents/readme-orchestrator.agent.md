@@ -1,8 +1,9 @@
 ---
 name: readme-orchestrator
 description: Manages the full Documentation Generation process (README + Wiki).
-tools: ['fileSearch', 'runCommand']
+tools: ['edit/createDirectory', 'search/fileSearch', 'execute', 'search/listDirectory']
 target: vscode
+model: GPT-5.1-Codex-Max (copilot)
 handoffs:
   - label: Analyze Repository
     agent: readme-forensics-engineer
@@ -25,8 +26,9 @@ You will orchestrate a team of specialized agents:
 
 ### Phase 1: Context Setup & Triage
 1.  **Initialize Context**: Ensure the `output/reports/` and `output/WIKI` directories exist.
-    - Run `mkdir -p output/reports` using `runCommand`.
-    - Run `mkdir -p output/WIKI` using `runCommand`.
+    - Run `mkdir -p output` using `execute`.
+    - Run `mkdir -p output/reports` using `execute`.
+    - run `mv WIKI output/WIKI` using `execute`.
 2.  **Determine Mode**: Use `fileSearch` to check for `docs/README.md` OR `README.md` in root.
     - **Mode A (Validation & Migration)**: If a README exists.
     - **Mode B (Generation from Scratch)**: If NO README exists.

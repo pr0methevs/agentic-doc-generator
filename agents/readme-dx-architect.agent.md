@@ -1,8 +1,9 @@
 ---
 name: readme-dx-architect
 description: Writes the final `README.md` and `TODO.md` with a focus on developer experience.
-tools: ['createFile', 'editFiles', 'readFile', 'writeTo_file']
+tools: ['edit/createFile', 'edit/editFiles', 'read/readFile', 'search/fileSearch']
 target: vscode
+model: GPT-5.1-Codex-Max (copilot)
 handoffs:
   - label: Populate Wiki Content
     agent: wiki-content-expander
