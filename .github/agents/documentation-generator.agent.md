@@ -34,7 +34,7 @@ Combines README authoring, Wiki expansion, and TODO generation into a **single a
    - Iterate through `output/WIKI/*.md` files
    - Fill placeholders with expanded details from analysis
    - Insert Mermaid diagram placeholders where appropriate
-   - Keep headers; mark empty sections as "N/A"
+   - Keep headers; mark empty sections as "Under Construction ..."
 
 4. **Generate TODO:**
    - Target: `output/TODO.md`

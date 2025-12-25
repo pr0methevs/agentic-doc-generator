@@ -1,23 +1,140 @@
 # 3. Testing
 
-## 3.1 Isolation / Ephemeral
-**Context:** Unit and component tests running in isolation.
+## 3.1 Unit Testing
 
-- **Frameworks:** [Jest, JUnit, Jmeter, ReadyAPI, SoapUI, etc.]
-- **Command:** `[test execution command]`
-- **Mocking Strategy:** [How external deps are mocked]
+### Overview
+Unit tests validate individual functions, methods, or classes in isolation from external dependencies.
 
-## 3.2 Solution / Solution Integration
-**Context:** Integration tests against running services.
+### Frameworks
+- [Jest, Karma, JUnit, pytest, etc.]
 
-- **Environment:** [L2/Ephemeral]
-- **Command:** `[integration test command]`
-- **Scenarios:**
-    - [Scenario 1]
-    - [Scenario 2]
+### Setup
+```bash
+# Install test dependencies
+[install command, e.g., npm install --save-dev jest]
 
-## 3.3 Manual Test Scenarios
-**Context:** Critical workflows requiring human verification.
+# Configure test runner (if needed)
+[config file location, e.g., jest.config.js]
+```
+
+### Execution
+```bash
+# Run all unit tests
+[unit test command, e.g., npm test, mvn test, gradle test]
+
+# Run with coverage
+[coverage command, e.g., npm test -- --coverage]
+
+# Run specific test file
+[single file command, e.g., npm test -- path/to/test.spec.ts]
+```
+
+---
+
+## 3.2 Isolation / Ephemeral Testing
+
+### Overview
+Component and integration tests running in isolated/mocked environments without external service dependencies.
+
+### Setup
+```bash
+# Start mock services
+[mock setup command, e.g., docker-compose up -d mocks]
+
+# Configure test environment
+[env config, e.g., export TEST_ENV=isolation]
+```
+
+### Execution
+```bash
+# Run isolation tests
+[isolation test command]
+
+# Run with mocked dependencies
+[mock test command, e.g., npm run test:integration]
+```
+
+### Mocking Strategy
+- **HTTP Mocks:** [Wiremock, MSW, nock, etc.]
+- **Database Mocks:** [H2, testcontainers, etc.]
+- **Message Queue Mocks:** [Embedded broker, etc.]
+
+### Frameworks
+- [Jmeter, ReadyAPI, SoapUI, Wiremock, etc.]
+
+### Pipeline URLs
+| Pipeline | Purpose | URL |
+| -------- | ------- | --- |
+| [Isolation Tests] | [Run isolation/mock tests] | [Jenkins/GHA URL] |
+
+### Setup Steps
+1. [Prerequisite step, e.g., Ensure CloudOps VM is provisioned, supplementary apps(Jmeter, ReadyAPI, Wiremock) are deployed to CloudOps VM ]
+2. [Configuration step, e.g., Deploy Wiremock stubs]
+3. [Validation step, e.g., Verify mocks are responding]
+
+---
+
+## 3.3 Solution / Solution Integration Testing
+
+### Overview
+End-to-end integration tests against running services in a deployed environment.
+
+### Setup
+```bash
+# Ensure L2/Ephemeral environment is running
+[environment check command]
+
+# Configure connection to test environment
+[config command, e.g., export API_URL=https://l2-api.example.com]
+
+# Obtain test credentials (if required)
+[credential setup]
+```
+
+### Execution
+```bash
+# Run integration tests
+[integration test command, e.g., npm run test:e2e]
+
+# Run specific scenario
+[scenario command]
+
+# Run against specific environment
+[environment-specific command, e.g., npm run test:e2e -- --env=l2]
+```
+
+### Environment
+- **L2 (Dev/Ephemeral):** [URL or access info]
+- **L4 (Release/QA):** [URL or access info]
+
+### Pipeline URLs
+| Pipeline | Purpose | URL |
+| -------- | ------- | --- |
+| [Integration Tests] | [Run E2E integration tests] | [Jenkins/GHA URL] |
+| [Smoke Tests] | [Quick validation of deployed env] | [Jenkins/GHA URL] |
+| [Regression Tests] | [Full regression suite] | [Jenkins/GHA URL] |
+
+### Setup Steps
+1. [Prerequisite step, e.g., Test data setup]
+2. [Environment step, e.g., Verify target environment is healthy]
+3. [Data step, e.g., Seed test data if required]
+4. [Configuration step, e.g., Set API_URL and AUTH_TOKEN]
+
+### Test Scenarios
+| Scenario | Description | Prerequisites |
+| -------- | ----------- | ------------- |
+| [Scenario 1] | [Description] | [Required setup] |
+| [Scenario 2] | [Description] | [Required setup] |
+
+### Frameworks
+- [ReadyAPI, SoapUI, Jmeter, Playwright, Cypress, etc.]
+
+---
+
+## 3.4 Manual Test Scenarios
+
+### Overview
+Critical workflows requiring human verification that cannot be fully automated.
 
 | Scenario | Steps | Expected Result |
 | -------- | ----- | --------------- |

@@ -17,9 +17,10 @@ Home (wiki root)
 │   ├── 2.2 Configuration Files
 │   ├── 2.3 Feature Flags
 ├── 3. Testing 
-│   ├── 3.1 Isolation / Ephemeral
-│   ├── 3.2 Solution / Solution Integration
-│   └── 3.3 Manual Test Scenarios
+│   ├── 3.1 Unit Testing
+│   ├── 3.2 Isolation / Ephemeral Testing
+│   ├── 3.3 Solution / Solution Integration Testing
+│   └── 3.4 Manual Test Scenarios
 ├── 4. CICD
 │   ├── 4.1 Github Actions
 │   ├── 4.2 Azure Key Vaults

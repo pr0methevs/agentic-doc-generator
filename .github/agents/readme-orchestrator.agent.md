@@ -28,7 +28,7 @@ Manages the 3-agent documentation workflow optimized for reduced context windows
    ```bash
    mkdir -p output
    mkdir -p output/reports
-   mv WIKI output/WIKI  # if WIKI exists at root
+   cp WIKI output/wiki  # if WIKI exists at root
    ```
 2. Determine mode:
    - **Mode A:** README exists (`**/README.md`)

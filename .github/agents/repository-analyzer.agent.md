@@ -27,7 +27,7 @@ You receive `{{mode}}` from the Orchestrator.
    - Scan build configs (`package.json`, `pom.xml`, `build.gradle`, `requirements.txt`)
    - Identify: language, frameworks, runtime, entry points, build commands
    - Map dependencies (top 10 only—skip transitive)
-   - Check for CI/CD files, Docker, deployment configs
+   - Check for CI/CD files(.github/workflows, Jenkinsfiles), Docker, deployment configs (applicattion.yml, application.properties, application-*.yml)
 
 2. **Validate Existing Docs (Mode A only):**
    - If README exists, spot-check claims against code facts
@@ -45,7 +45,7 @@ You receive `{{mode}}` from the Orchestrator.
 ## Project Identity
 - **Name**: [from config]
 - **Version**: [version]
-- **Language**: [primary language + version]
+- **Language**: [primary & secondary languages + versions]
 - **Framework**: [main framework]
 - **Build Tool**: [npm/maven/gradle/etc]
 
@@ -65,7 +65,7 @@ You receive `{{mode}}` from the Orchestrator.
 - API: [paths if applicable]
 
 ## Infrastructure
-- Deploy: [Dockerfile/K8s/PCF manifest found?]
+- Deploy: [Dockerfile/PCF manifest/CloudOps found?]
 - CI/CD: [Jenkinsfile/.github/workflows found?]
 - Database: [type if identifiable]
 
