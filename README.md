@@ -7,60 +7,33 @@ This project implements an **Agentic Documentation Swarm**—a coordinated team 
 **Value Proposition for IT Leaders:**
 *   **Consistency:** Removes human error and stylistic variance from technical docs.
 *   **Speed:** Generates comprehensive documentation suites in minutes, not days.
-*   **Separation of Concerns:** Distinct agents handle fact-gathering (Forensics) versus presentation (DX), ensuring technical accuracy without sacrificing readability.
-*   **Standardization:** Enforces strict templates (Conventional Commits, standardized READMEs) automatically.
+*   **Context-Optimized:** 3-agent architecture minimizes context window usage for Copilot compatibility.
+*   **Standardization:** Enforces strict templates (`README_TEMPLATE.md`, `TODO_TEMPLATE.md`) automatically.
 
 ---
 
 ## 2. High-Level Workflow
 
-The process is orchestrated by a central manager agent that dispatches specialized workers in a strict linear pipeline. This ensures that downstream agents always have validated context from upstream analysis.
+The process uses a streamlined 3-agent pipeline optimized for reduced context windows (e.g., GitHub Copilot).
 
 ```mermaid
-    graph TD
+graph LR
     %% Theme Definitions - Nordic Slate
     classDef manager fill:#2c323a,stroke:#62aeb7,stroke-width:3px,color:#f4f7f6
     classDef worker fill:#395671,stroke:#f4f7f6,stroke-width:2px,color:#f4f7f6
     classDef artifact fill:#f4f7f6,stroke:#748590,stroke-width:2px,stroke-dasharray: 5 5,color:#2c323a
     classDef user fill:#62aeb7,stroke:#fff,stroke-width:2px,color:#fff
-    linkStyle default stroke:#748590,stroke-width:2px
 
-    User((User)) -->|Triggers| Orch["**Readme Orchestrator**<br/>(Manager)"]
-    
-    subgraph "Phase 1: Context & Fact Finding"
-        direction TB
-        Orch -->|Handoff| Forensics["**Forensics Engineer**<br/>(Analyst)"]
-        Forensics -->|Generates| Brief[Technical Brief]
-    end
+    User((User)) -->|Triggers| Orch["**Orchestrator**"]
+    Orch -->|Handoff| Analyzer["**Repository Analyzer**"]
+    Analyzer -->|Generates| Report[analysis_report.md]
+    Report --> Generator["**Documentation Generator**"]
+    Generator -->|Generates| Outputs[README + Wiki + TODO]
 
-    subgraph "Phase 2: Validation"
-        direction TB
-        Brief --> QA["**Quality Analyst**<br/>(Auditor)"]
-        QA -->|Generates| Report[Validation Report]
-    end
-
-    subgraph "Phase 3: Execution & Generation"
-        direction TB
-        Report --> DX["**DX Architect**<br/>(Writer)"]
-        DX -->|Generates| README[output/README.md]
-        
-        README --> WikiExp["**Wiki Content Expander**<br/>(Tech Writer)"]
-        Brief --> WikiExp
-        WikiExp -->|Populates| Wiki[output/WIKI/*.md]
-
-        Wiki --> TodoMgr["**Todo Manager**<br/>(Auditor)"]
-        README --> TodoMgr
-        TodoMgr -->|Generates| TODO[output/TODO.md]
-    end
-
-    %% Apply Styles
     class Orch manager
-    class Forensics,QA,DX,WikiExp,TodoMgr worker
-    class Brief,Report,README,TODO,Wiki artifact
+    class Analyzer,Generator worker
+    class Report,Outputs artifact
     class User user
-    
-    %% Global Styling
-    linkStyle default stroke:#7e8590,stroke-width:1px
 ```
 
 ### Initial Prompt
@@ -68,103 +41,85 @@ The process is orchestrated by a central manager agent that dispatches specializ
 @readme-orchestrator Initialize the documentation generation workflow. 
 1. Create the `output/` directories.
 2. Analyze the repository to determine if we are in "Greenfield" (New) or "Brownfield" (Migration) mode.
-3. Hand off the technical analysis to the @readme-forensics-engineer.
+3. Hand off the technical analysis to the @repository-analyzer.
 ```
 
 ---
 
 ## 3. The Agent Squad
 
-Each agent in this pipeline mimics a specific real-world role within a software development team.
+A lean 3-agent architecture optimized for Copilot's reduced context windows.
 
 ### 1. `readme-orchestrator` (The Project Manager)
 *   **Role:** Workflow orchestration and state management.
 *   **Responsibility:**
-    *   Initializes the `output/` workspaces.
-    *   Determines if the project is in "Greenfield" (Generation) or "Brownfield" (Migration) mode.
-    *   Manages handoffs between agents to prevent context loss.
+    *   Initializes the `output/` directories.
+    *   Determines mode: **Mode A** (README exists) or **Mode B** (no README).
+    *   Passes `${mode}` to the Repository Analyzer.
 
-### 2. `readme-forensics-engineer` (The Systems Analyst)
-*   **Role:** Deep code analysis and fact extraction.
+### 2. `repository-analyzer` (The Systems Analyst + Auditor)
+*   **Role:** Combined code analysis and documentation validation.
 *   **Responsibility:**
-    *   Scans the entire repository to understand the tech stack, implementation details, and hidden logic.
-    *   **Output:** `output/reports/technical_brief.md` (Raw, unstructured technical facts).
-    *   *Note: This agent does not write user-facing text; it only extracts truth.*
+    *   Scans repository for tech stack, dependencies, entry points, and build commands.
+    *   **Mode A:** Validates existing README claims against codebase facts.
+    *   **Mode B:** Extracts facts for new documentation.
+    *   **Output:** `output/reports/analysis_report.md` (concise ~40 lines).
 
-### 3. `readme-quality-analyst` (The Auditor)
-*   **Role:** Verification and gap analysis.
+### 3. `documentation-generator` (The Technical Writer)
+*   **Role:** Synthesizes all documentation artifacts.
 *   **Responsibility:**
-    *   Reviews the `technical_brief.md` against the codebase to ensure no hallucinations.
-    *   Identifies missing sections or ambitious claims.
-    *   **Output:** `output/reports/validation_report.md` (A "pass/fail" report for the brief).
-
-### 4. `readme-dx-architect` (The Technical Writer co. "DevRel")
-*   **Role:** Synthesis and user-facing documentation.
-*   **Responsibility:**
-    *   Consumes the validated facts.
-    *   Applies the `README_TEMPLATE.md` to ensure consistent formatting.
-    *   Writes the "Selling Pitch" and "Getting Started" guides.
-    *   **Output:** `output/README.md`.
-
-### 5. `wiki-content-expander` (The Operations Specialist)
-*   **Role:** Detailed operational documentation.
-*   **Responsibility:**
-    *   Takes the high-level concepts from the README.
-    *   Expands them into deep-dive articles in the `WIKI/` directory.
-    *   Fills in structure templates with specific configuration, API details, and deployment steps.
-    *   **Output:** Fully populated `output/WIKI/` directory (e.g., `1.1-System-Overview.md`, `output/WIKI/4.1-API-Endpoints.md`).
-
-### 6. `todo-manager` (The Project Auditor)
-*   **Role:** Final gap analysis and action planning.
-*   **Responsibility:**
-    *   Scans the now-complete `README.md` and `WIKI/` files.
-    *   Identifies every single missing piece of information, placeholder, or "TBD".
-    *   Consolidates them into a prioritized list for the human user.
-    *   **Output:** `output/TODO.md`.
+    *   Reads `analysis_report.md` and strict templates.
+    *   Generates `output/README.md` using `templates/README_TEMPLATE.md`.
+    *   Populates `output/WIKI/*.md` pages.
+    *   Creates `output/TODO.md` using `templates/TODO_TEMPLATE.md`.
+    *   **Outputs:** README, Wiki, TODO—all in one pass.
 
 ---
 
 ## 4. Data Flow Architecture
 
-The system relies on a **"Context Waterfall"** approach where information is refined at each step.
+The system uses a **single intermediate file** to minimize context consumption.
 
 ```mermaid
 sequenceDiagram
-    %% Nordic Slate Theme Config
-    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#395671', 'primaryTextColor': '#f4f7f6', 'edgeLabelBackground':'#2c323a', 'actorBorder': '#62aeb7', 'actorBkg': '#2c323a', 'signalColor': '#748590', 'signalTextColor': '#f4f7f6', 'textColor': '#f4f7f6', 'mainBkg': '#2c323a', 'sequenceNumberColor': '#62aeb7', 'activationBorderColor': '#62aeb7'}}}%%
+    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#395671', 'primaryTextColor': '#f4f7f6', 'edgeLabelBackground':'#2c323a', 'actorBorder': '#62aeb7', 'actorBkg': '#2c323a', 'signalColor': '#748590', 'signalTextColor': '#f4f7f6', 'textColor': '#f4f7f6', 'mainBkg': '#2c323a'}}}%%
     
     participant Repo as Codebase
-    participant Forensics as Forensics Agent
+    participant Analyzer as Repository Analyzer
     participant Context as output/reports/
-    participant DX as DX Architect Agent
-    participant WikiExp as Wiki Agent
-    participant TodoMgr as TODO Manager
+    participant Generator as Doc Generator
     participant Docs as Final Docs
 
-    Note over Forensics: Phase 1: Exploration
-    Forensics->>Repo: Read Files & Structure
-    Forensics->>Context: Write technical_brief.md
+    Note over Analyzer: Phase 1: Analysis
+    Analyzer->>Repo: Scan files & configs
+    Analyzer->>Context: Write analysis_report.md
     
-    Note over DX: Phase 2: Synthesis
-    DX->>Context: Read technical_brief.md
-    DX->>Context: Read validation_report.md
-    DX->>Docs: Generate README.md
-    
-    Note over DX, Docs: Phase 3: Expansion
-    DX->>Docs: Read README.md (Source of Truth)
-    DX->>Docs: Populate WIKI/ templates
-
-    Note over TodoMgr, Docs: Phase 4: Audit
-    TodoMgr->>Docs: Scan README & WIKI
-    TodoMgr->>Docs: Generate TODO.md
+    Note over Generator: Phase 2: Generation
+    Generator->>Context: Read analysis_report.md
+    Generator->>Docs: Generate README.md
+    Generator->>Docs: Populate WIKI/*.md
+    Generator->>Docs: Generate TODO.md
 ```
 
 ---
 
 ## 5. Technical Implementation Details
 
-*   **Context Storage:** detailed reports are stored in `output/reports/`. This allow agents to "pass the baton" without needing massive context windows to remember the entire conversation history.
-*   **Idempotency:** The Wiki Expander is designed to be safe to run multiple times; it looks for placeholders to fill rather than overwriting custom changes.
-*   **Templates:**
-    *   `README_TEMPLATE.md`: Enforces structure for the main entry point.
-    *   `WIKI_TEMPLATE.md`: Defines the schema for the detailed documentation.
+*   **Context Storage:** Single report file (`analysis_report.md`) replaces multiple intermediate files.
+*   **Context Savings:** 3 agents vs 6 = ~40% reduction in prompt loading.
+*   **Idempotency:** Generator fills placeholders without overwriting custom content.
+*   **Strict Templates:**
+    *   `README_TEMPLATE.md`: Structure for the main entry point.
+    *   `TODO_TEMPLATE.md`: Structured gap analysis format.
+    *   `WIKI_TEMPLATE.md`: Schema for detailed documentation.
+
+---
+
+## 6. Archived Agents
+
+The original 6-agent implementation is preserved in `agents/archive/` for reference:
+- `readme-forensics-engineer.agent.md`
+- `readme-quality-analyst.agent.md`
+- `readme-dx-architect.agent.md`
+- `wiki-content-expander.agent.md`
+- `todo-manager.agent.md`
