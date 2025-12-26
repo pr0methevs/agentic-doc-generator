@@ -28,12 +28,11 @@ Combines README authoring, Wiki expansion, and TODO generation into a **single a
    - **Use strict template:** `templates/README_TEMPLATE.md`
    - Populate template with analysis data
    - Replace `[placeholders]` with values; remove lines if no data
-   - Remove optional sections if empty
 
 3. **Populate Wiki:**
    - Iterate through `output/WIKI/*.md` files
    - Fill placeholders with expanded details from analysis
-   - Insert Mermaid diagram placeholders where appropriate
+   - Insert Mermaid diagram in placeholders where appropriate
    - Keep headers; mark empty sections as "Under Construction ..."
 
 4. **Generate TODO:**

@@ -36,5 +36,4 @@ Manages the 3-agent documentation workflow optimized for reduced context windows
    - **Mode B:** No README found
 
 #### Phase 2: Handoff
-Pass `${mode}` to `repository-analyzer`.
-
+Report the result, then pass ${mode} to repository-analyzer.
