@@ -27,6 +27,10 @@ Unit tests validate individual functions, methods, or classes in isolation from 
 
 # Run specific test file
 [single file command, e.g., npm test -- path/to/test.spec.ts]
+
+# Run with static code analysis
+- [pmd, command, e.g., ./gradlew pmdMain]
+- [spotbugs, command, e.g., ./gradlew spotbugsMain]
 ```
 
 ---
@@ -35,6 +39,7 @@ Unit tests validate individual functions, methods, or classes in isolation from 
 
 ### Overview
 Component and integration tests running in isolated/mocked environments without external service dependencies.
+- This should reference Jmeter, Wiremock, and ReadyAPI -- no MockMvc or unit tests
 
 ### Setup
 ```bash
@@ -51,7 +56,7 @@ Component and integration tests running in isolated/mocked environments without 
 [isolation test command]
 
 # Run with mocked dependencies
-[mock test command, e.g., npm run test:integration]
+[mock test command used in the pipleines for jmeter/readyapi or in npm if using cypress, e.g., npm run cy:dev]
 ```
 
 ### Mocking Strategy
@@ -78,10 +83,11 @@ Component and integration tests running in isolated/mocked environments without 
 
 ### Overview
 End-to-end integration tests against running services in a deployed environment.
+- This should reference Jmeter, Wiremock, and ReadyAPI as well as live services -- no MockMvc or unit tests
 
 ### Setup
 ```bash
-# Ensure L2/Ephemeral environment is running
+# Ensure L4/Release environment is running
 [environment check command]
 
 # Configure connection to test environment
@@ -89,6 +95,9 @@ End-to-end integration tests against running services in a deployed environment.
 
 # Obtain test credentials (if required)
 [credential setup]
+
+# Run with mocked dependencies
+[mock test command used in the pipleines for jmeter/readyapi or in npm if using cypress, e.g., npm run cy:rel]
 ```
 
 ### Execution
@@ -121,6 +130,8 @@ End-to-end integration tests against running services in a deployed environment.
 4. [Configuration step, e.g., Set API_URL and AUTH_TOKEN]
 
 ### Test Scenarios
+> Analyze Jmeter and/or ReadyAPI test suites for scenarios covered
+
 | Scenario | Description | Prerequisites |
 | -------- | ----------- | ------------- |
 | [Scenario 1] | [Description] | [Required setup] |

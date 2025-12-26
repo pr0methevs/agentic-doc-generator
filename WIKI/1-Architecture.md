@@ -53,6 +53,6 @@
 
 | Role | Name | Contact |
 | -- | -- | -- |
-| **Product Owner** | [Name] | [Email/Slack] |
-| **Tech Lead** | [Name] | [Email/Slack] |
-| **Support Team** | [Team Name] | [Channel] |
+| **Product Manager** | [Name] | [Email/Slack] |
+| **Architect** | [Name] | [Email/Slack] |
+| **Support Team(s)** | [Team Name] | [Channel] |

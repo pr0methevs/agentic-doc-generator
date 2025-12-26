@@ -11,6 +11,57 @@ AGENT INSTRUCTIONS:
  
 -->
 
+# README Structure
+
+Use this page tree as the mandatory README skeleton:
+- Each top-level section is **Required** (0-5)
+- Sub-headings are added per project complexity
+
+```
+README (root)
+├── 0. Overview
+│   ├── Purpose
+│   ├── What it does
+│   ├── Problem Solved
+│   ├── Key Benefits
+│   ├── Functions
+│   └── Table of Contents
+├── 1. Architecture & Business Context
+│   ├── Business Context
+│   └── Architectural Context
+│       └── Technology Stack
+│           ├── Languages
+│           ├── Frameworks & Libraries
+│           └── Infrastructure
+├── 2. Getting Started (15-Minute Path)
+│   ├── Prerequisites
+│   │   ├── Required Access
+│   │   └── Required Software
+│   ├── Project Structure
+│   │   └── Key Directories
+│   ├── Installation Steps
+│   └── Running Locally
+├── 3. Testing
+│   └── Local Testing
+│       ├── Unit Tests
+│       ├── Integration Tests
+│       └── Test Coverage
+├── 4. CI/CD & Deployment
+│   ├── Pipelines
+│   │   ├── Ephemeral/Development
+│   │   └── PRODUCTION Deploy
+│   ├── Deployment Locations
+│   │   ├── Availability
+│   │   ├── Foundation
+│   │   └── Log Levels
+│   └── CI Environment Testing
+│       └── E2E Testing
+├── 5. Contributing
+│   ├── Development Workflow
+│   └── Code Review Guidelines
+└── License
+```
+
 ### [Project Name]
 
 The following sections provides a "Getting Up to Speed" overview, designed to be completed in approximately 15 minutes. 
@@ -217,11 +268,12 @@ cd [project-name]
 
 #### Development Workflow
 
-- [Link to Useful Info Sharepoint containing contributing documentation/branching strategy]
+- [Branching Strategy](https://myfedex.sharepoint.com/:w:/r/sites/LHVS/Shared%20Documents/General/LHE%20-%20Useful%20Info/LH%20Art%20Branching%20Strategy.docx?d=w90472e9033584be89ddc3d045016f073&csf=1&web=1&e=BsII8e)
 
 #### Code Review Guidelines
 
-- [Link to Useful Info Sharepoint containing code review guidelines]
+- [Quality Gate Review](https://myfedex.sharepoint.com/:b:/r/sites/LHVS/Shared%20Documents/General/LHE%20-%20Useful%20Info/TEST-Quality%20Gate%20Review%20Process%20Overview-revised%2009292025.pdf?csf=1&web=1&e=F8f4xk)
+- [Code Review - Best Practices](https://myfedex.sharepoint.com/:w:/r/sites/LHVS/_layouts/15/Doc.aspx?sourcedoc=%7BC1AE7CD9-514B-42B0-BCB1-05CAFB24FB27%7D&file=TEST-Code%20Review%20Guidelines_Best%20Practices.docx&action=default&mobileredirect=true)
 
 ---
 
