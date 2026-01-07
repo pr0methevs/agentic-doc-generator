@@ -28,27 +28,31 @@ Combines forensic analysis and quality validation into a **single pass**, includ
 You receive `{{mode}}` and `{{legacyWikiPath}}` from the Orchestrator.
 
 1. **Analyze Repository:**
-   - Scan build configs (`package.json`, `pom.xml`, `build.gradle`, `requirements.txt`)
-   - Identify: language, frameworks, runtime, entry points, build commands
-   - Map dependencies (top 10 only—skip transitive)
-   - Check for CI/CD files (`.github/workflows`, Jenkinsfiles), Docker, deployment configs (`application.yml`, `application.properties`, `application-*.yml`)
+    - Scan build configs (`package.json`, `pom.xml`, `build.gradle`, `requirements.txt`)
+    - Identify: language, frameworks, runtime, entry points, build commands
+    - Map dependencies (top 10 only—skip transitive)
+    - Check for CI/CD files (`.github/workflows`, Jenkinsfiles), Docker, deployment configs (`application.yml`, `application.properties`, `application-*.yml`)
 
 2. **Validate Existing Docs (Mode A only):**
-   - If README exists, spot-check claims against code facts
-   - Note discrepancies inline in the report
+    - If README exists:
+        - Spot-check claims against code facts
+        - Flag incorrect information with ❌ and explain why it is wrong
+        - Flag outdated information with ⚠️ and provide the current correct value
+        - Flag information that will be omitted from the new README with 🚫 and justify the omission
+    - Document all discrepancies in the Validation section of the report
 
 3. **Legacy Wiki Inventory (if {{legacyWikiPath}} is not "none"):**
-   - List all files in `{{legacyWikiPath}}`
-   - Count markdown files
-   - Identify file naming conventions (numbered, kebab-case, etc.)
-   - Extract top-level topics from filenames
-   - Note: This is a quick inventory; deep analysis is done by wiki-migration-analyzer
+    - List all files in `{{legacyWikiPath}}`
+    - Count markdown files
+    - Identify file naming conventions (numbered, kebab-case, etc.)
+    - Extract top-level topics from filenames
+    - Note: This is a quick inventory; deep analysis is done by wiki-migration-analyzer
 
 4. **Output:** Write to `output/reports/analysis_report.md` using template below.
 
 5. **Handoff Decision:**
-   - If `{{legacyWikiPath}}` is NOT "none" → Handoff to `wiki-migration-analyzer`
-   - If `{{legacyWikiPath}}` is "none" → Handoff to `documentation-generator`
+    - If `{{legacyWikiPath}}` is NOT "none" → Handoff to `wiki-migration-analyzer`
+    - If `{{legacyWikiPath}}` is "none" → Handoff to `documentation-generator`
 
 ### Analysis Report Template (Keep Concise)
 
@@ -82,10 +86,13 @@ You receive `{{mode}}` and `{{legacyWikiPath}}` from the Orchestrator.
 - CI/CD: [Jenkinsfile/.github/workflows found?]
 - Database: [type if identifiable]
 
-## Validation (Mode A only)
-- ✅ Accurate: [list]
-- ⚠️ Discrepancies: [list]
-- ❌ Missing: [list]
+## README Validation (Mode A only)
+- ✅ Accurate: [list verified claims]
+- ⚠️ Outdated: [claim] → [current correct value]
+- ❌ Incorrect: [claim] — [reason it is wrong]
+- 🚫 Omitted: [content being removed] — [justification for omission]
+- 📝 Missing: [required content not present in existing docs]
+
 
 ## Legacy Wiki Inventory (if applicable)
 
@@ -96,10 +103,10 @@ You receive `{{mode}}` and `{{legacyWikiPath}}` from the Orchestrator.
 - **File Pattern**: [numbered/kebab-case/mixed/hierarchical]
 
 ### File List
-| Filename | Size | Topic (from name) |
-|----------|------|-------------------|
-| [file1.md] | [KB] | [inferred topic] |
-| [file2.md] | [KB] | [inferred topic] |
+| Filename | Topic (from name) |
+|----------|-------------------|
+| [file1.md] | [inferred topic] |
+| [file2.md] | [inferred topic] |
 
 ### Preliminary Content Categories
 - **Architecture/Design**: [count] files

@@ -23,10 +23,10 @@ Specializes in analyzing existing project wiki directories, validating content a
 
 Search for existing wiki directories in the project root using these patterns:
 - `wiki/` (lowercase)
-- `docs/wiki/`
 - `documentation/`
-- `.wiki/`
+- `{{repo-name}}.wiki/`
 - `docs/` (if contains wiki-like structure)
+- `doc/` (alternative docs folder)
 
 ### Workflow
 
@@ -34,7 +34,7 @@ You receive `{{wikiPath}}` and `{{mode}}` from the Orchestrator.
 
 1. **Inventory Legacy Wiki:**
    - List all markdown files in `{{wikiPath}}`
-   - Create a file manifest with: filename, size, last modified (if available)
+   - Create a file manifest with: filenames
    - Identify file organization pattern (flat, hierarchical, numbered, etc.)
 
 2. **Content Analysis (per file):**
@@ -85,9 +85,9 @@ You receive `{{wikiPath}}` and `{{mode}}` from the Orchestrator.
 
 ## File Manifest
 
-| Legacy File | Size | Content Type | Target Section | Action |
-|-------------|------|--------------|----------------|--------|
-| [filename] | [KB] | [Concept/Task/Reference] | [1-Architecture] | [Migrate/Merge/Skip] |
+| Legacy File | Content Type | Target Section | Action |
+|-------------|--------------|----------------|--------|
+| [filename] | [Concept/Task/Reference] | [1-Architecture] | [Migrate/Merge/Skip] |
 
 ## Content Mapping
 

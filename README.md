@@ -8,7 +8,7 @@ This project implements an **Agentic Documentation Swarm**—a coordinated team 
 *   **Consistency:** Removes human error and stylistic variance from technical docs.
 *   **Speed:** Generates comprehensive documentation suites in minutes, not days.
 *   **Context-Optimized:** 3-4 agent architecture minimizes context window usage for Copilot compatibility.
-*   **Standardization:** Enforces strict templates (`README_TEMPLATE.md`, `TODO_TEMPLATE.md`) automatically.
+*   **Standardization:** Enforces strict templates (`README_TEMPLATE.md`, `WIKI_TEMPLATE.md`, `TODO_TEMPLATE.md`) automatically.
 *   **Migration Support:** Automatically detects and migrates existing wiki content into the standardized structure.
 
 ---
@@ -43,13 +43,9 @@ graph LR
 ```
 
 ### Initial Prompt
-```
-@readme-orchestrator Initialize the documentation generation workflow. 
-1. Create the `output/` directories.
-2. Analyze the repository to determine if we are in "Greenfield" (New) or "Brownfield" (Migration) mode.
-3. Detect any legacy wiki directories (e.g., wiki/, docs/, documentation/).
-4. Hand off the technical analysis to the @repository-analyzer.
-```
+
+> [!TIP]
+> See the [Job Aid](JOB_AID.md) for the initial prompt to start the documentation generation workflow.
 
 ---
 
@@ -150,14 +146,14 @@ sequenceDiagram
 
 The orchestrator searches for these directory patterns (case-insensitive):
 
-| Pattern | Description |
-|---------|-------------|
-| `wiki/` | Common wiki folder |
-| `docs/wiki/` | Wiki nested in docs |
-| `documentation/` | Full documentation folder |
-| `.wiki/` | Hidden wiki folder |
-| `docs/` | Docs with 3+ markdown files |
-| `doc/` | Alternative docs folder |
+| Pattern                | Description                 |
+|------------------------|-----------------------------|
+| `wiki/`                | Common wiki folder          |
+| `docs/wiki/`           | Wiki nested in docs         |
+| `documentation/`       | Full documentation folder   |
+| `{project-name}.wiki/` | Project wiki folder         |
+| `docs/`                | Docs with 3+ markdown files |
+| `doc/`                 | Alternative docs folder     |
 
 ### Migration Workflow
 
@@ -170,18 +166,7 @@ When a legacy wiki is detected:
 
 ---
 
-## 6. Archived Agents
-
-The original 6-agent implementation is preserved in `agents/archive/` for reference:
-- `readme-forensics-engineer.agent.md`
-- `readme-quality-analyst.agent.md`
-- `readme-dx-architect.agent.md`
-- `wiki-content-expander.agent.md`
-- `todo-manager.agent.md`
-
----
-
-## 7. Wiki Migration Feature
+## 6. Wiki Migration Feature
 
 ### Overview
 

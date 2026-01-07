@@ -2,7 +2,19 @@
 
 > **Auto-Generated Report**: This document lists missing information that the AI Agent could not determine from the codebase.
 > **Action Required**: Please fill in these gaps to complete the `README.md` and `WIKI` documentation.
+ 
 
+> [!IMPORTANT] 
+> **Mandatory Review Checklist**
+> Before publishing any generated documentation, verify the following:
+> - [ ] All code examples compile and run correctly
+> - [ ] Version numbers, dependencies, and configurations match the actual codebase
+> - [ ] API endpoints, parameters, and responses are accurate
+> - [ ] Setup and installation instructions work as described
+> - [ ] No sensitive information (secrets, credentials, internal URLs) is exposed
+> - [ ] Technical claims align with the current implementation
+> - [ ] Links and references point to valid resources
+ 
 ---
 
 ## 1. README (Front Door)

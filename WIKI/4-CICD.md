@@ -3,9 +3,38 @@
 ## 4.1 Github Actions
 **Context:** Workflow automation.
 
-| Workflow | Status | File | Purpose | Parameters |
-| -------- | ------ | ---- | ------- | ---------- |
-| [Name] | [available / in-progress / not-available] | `.github/workflows/[file].yml` | [Description] | `[inputs.name]` |
+### Overview
+
+| Workflow Name | Status | Filename                       | Purpose |
+|---------------| ------ |--------------------------------| ------- |
+| [Name]        | [available / in-progress / not-available] | `.github/workflows/[file].yml` | [Description] |
+
+### Workflow Details
+> Per Workflow, provide the following details:
+
+#### [Workflow Name] 
+**Purpose:** [Detailed description of what this workflow does]
+
+**Triggers:**
+- [e.g., `push` to `main` branch]
+- [e.g., `workflow_dispatch` (manual)]
+- [e.g., `schedule` - cron expression]
+
+**Inputs:**
+
+| Input Name | Type | Required | Default Value | Description |
+| ---------- | ---- | -------- | ------------- | ----------- |
+| `[input-name]` | `[string/boolean/choice]` | `[true/false]` | `[value]` | [Description] |
+
+**Secrets Used:**
+- `SECRET_NAME` - [Purpose]
+
+**Key Steps:**
+1. [Step description]
+2. [Step description]
+
+**Outputs:**
+- `output-name`: [Description]
 
 ## 4.2 Azure Key Vaults
 **Context:** Vaults accessed during the build process.
@@ -13,7 +42,7 @@
 - **Dev Vault:** [Link]
 - **Prod Vault:** [Link]
 
-## 4.3 Azure Keyvault Secrets
+## 4.3 Azure Key Vault Secrets
 **Context:** Secrets management mapping.
 
 | Secret Name | Key Vault | Usage & Purpose |

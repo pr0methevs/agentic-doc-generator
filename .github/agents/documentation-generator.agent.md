@@ -31,35 +31,35 @@ Combines README authoring, Wiki expansion (including legacy wiki migration), and
    - Replace `[placeholders]` with values; remove lines if no data
 
 3. **Populate Wiki (with Legacy Content Migration):**
-   
+
    #### Step 3a: Load Migration Plan
    If `wiki_migration_report.md` exists:
    - Parse the "Content Mapping" section for source → target mappings
    - Load the "Migration Actions" priority table
    - Note any "Special Content Requiring Manual Review"
-   
+
    #### Step 3b: Process Each Target Section
    For each `output/WIKI/*.md` file:
-   
+
    1. **Check for mapped legacy content:**
       - Look up target section in migration report
       - If legacy content exists with action "Migrate" or "Merge":
-        - Read the source legacy file
-        - Extract validated content (skip items marked as "Invalid/Inaccurate")
-        - Apply any noted corrections from validation
-   
+         - Read the source legacy file
+         - Extract validated content (skip items marked as "Invalid/Inaccurate")
+         - Apply any noted corrections from validation
+
    2. **Integrate content:**
       - If action is **Migrate**: Insert legacy content under appropriate subsection
       - If action is **Merge**: Combine with existing placeholder content
       - Preserve the target section's heading structure
       - Add source attribution comment: `<!-- Migrated from: [source_file] -->`
-   
+
    3. **Handle conflicts:**
       - If both legacy and analysis data exist for same topic:
-        - Prefer analysis data for factual claims (versions, commands, etc.)
-        - Prefer legacy for explanatory/conceptual content
-        - Flag conflicts in TODO
-   
+         - Prefer analysis data for factual claims (versions, commands, etc.)
+         - Prefer legacy for explanatory/conceptual content
+         - Flag conflicts in TODO
+
    4. **Fill remaining gaps:**
       - Use analysis data from `analysis_report.md`
       - Insert Mermaid diagram in placeholders where appropriate

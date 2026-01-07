@@ -8,6 +8,7 @@
 
 **Diagrams:**
 - **External:** [Link to Visio/SharePoint C4 Context/Container Diagram]
+- **Sparx:** [Link to Sparx]
 - **Agent Generated:**
 ```mermaid
 %% Insert Mermaid C4 or Flowchart here

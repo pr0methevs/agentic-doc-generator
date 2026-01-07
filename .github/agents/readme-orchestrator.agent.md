@@ -40,20 +40,21 @@ Manages the documentation workflow optimized for reduced context windows, includ
 
 ##### README Detection
 - **Mode A:** README exists (`**/README.md`)
-   - If multiple READMEs are found, read them all 
+    - If multiple READMEs are found, read them all
 - **Mode B:** No README found
 
 ##### Legacy Wiki Detection
 Search for legacy wiki directories in project root using these patterns (case-insensitive):
+- Should be named after the current repository, e.g., `MyProject.wiki/`
 
-| Pattern | Description |
-|---------|-------------|
-| `wiki/` | Common wiki folder (lowercase) |
-| `docs/wiki/` | Wiki nested in docs |
-| `documentation/` | Full documentation folder |
-| `.wiki/` | Hidden wiki folder |
-| `docs/` | Docs folder with wiki-like content |
-| `doc/` | Alternative docs folder |
+| Pattern              | Description                          |
+|----------------------|--------------------------------------|
+| `wiki/`              | Common wiki folder       |
+| `*.wiki/`            | Project wiki folder      |
+| `{{repoName}}.wiki/` | Current repo wiki folder |
+| `docs/wiki/`         | Wiki nested in docs                  |
+| `docs/`              | Docs folder with wiki-like content   |
+| `doc/`               | Alternative docs folder              |
 
 **Detection Rules:**
 1. Check each pattern in order of specificity
@@ -96,4 +97,3 @@ After orchestration, the following should exist:
 - `output/README.md` - Generated README
 - `output/WIKI/` - Populated wiki with migrated content
 - `output/TODO.md` - Documentation gaps and action items
-
