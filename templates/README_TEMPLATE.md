@@ -1,6 +1,4 @@
 <!-- 
-Use this template as a mandatory baseline for all repositories. 
-
 AGENT INSTRUCTIONS:
 - Replace ALL placeholders in [brackets] with actual values
 - Maintain section order for linear onboarding flow
@@ -8,10 +6,9 @@ AGENT INSTRUCTIONS:
 - Optional sections are added when relevant.
 - If information is missing, add to TODO.md and  leave the [placeholders]
 - Business stakeholders can understand sections Overview, Table of Contents, sections without technical depth.
- 
 -->
 
-# README Structure
+## README Structure
 
 Use this page tree as the mandatory README skeleton:
 - Each top-level section is **Required** (0-5)
@@ -66,7 +63,9 @@ README (root)
 
 The following sections provides a "Getting Up to Speed" overview, designed to be completed in approximately 15 minutes. 
 
-> [!INFO] RTM - Read The Manual
+> [!INFO]
+> RTM - Read The Manual
+> 
 > For comprehensive and detailed documentation, please consult the project wiki.
 
 ### 📋 0. Overview
@@ -268,12 +267,17 @@ cd [project-name]
 
 #### Development Workflow
 
-- [Branching Strategy](https://myfedex.sharepoint.com/:w:/r/sites/LHVS/Shared%20Documents/General/LHE%20-%20Useful%20Info/LH%20Art%20Branching%20Strategy.docx?d=w90472e9033584be89ddc3d045016f073&csf=1&web=1&e=BsII8e)
+<!-- REQUIRED: Do not remove these links -->
+
+- [Branching Strategy]
+
 
 #### Code Review Guidelines
 
-- [Quality Gate Review](https://myfedex.sharepoint.com/:b:/r/sites/LHVS/Shared%20Documents/General/LHE%20-%20Useful%20Info/TEST-Quality%20Gate%20Review%20Process%20Overview-revised%2009292025.pdf?csf=1&web=1&e=F8f4xk)
-- [Code Review - Best Practices](https://myfedex.sharepoint.com/:w:/r/sites/LHVS/_layouts/15/Doc.aspx?sourcedoc=%7BC1AE7CD9-514B-42B0-BCB1-05CAFB24FB27%7D&file=TEST-Code%20Review%20Guidelines_Best%20Practices.docx&action=default&mobileredirect=true)
+<!-- REQUIRED: Do not remove these links -->
+
+- [Quality Gate Review]
+- [Code Review - Best Practices]
 
 ---
 

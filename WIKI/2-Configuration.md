@@ -1,6 +1,6 @@
 # 2. Configuration
 
-## 2.1 Envirnonment Variables
+## 2.1 Environment Variables
 **Context:** App-level settings found in code/manifests.
 
 | Variable | Description | Required | Default | Example |

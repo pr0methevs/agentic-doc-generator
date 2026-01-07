@@ -36,35 +36,35 @@ Home (wiki root)
 │   └── 6.3 JMS
 ├── 7. Monitoring & Observability
 │   ├── 7.1 Application Performance
-│   └── 7.2 Logging - Monitoring - Alerts
-│   └── 7.3 Usefule Queries - Splunk / DynaTrace
+│   ├── 7.2 Logging - Monitoring - Alerts
+│   └── 7.3 Useful Queries - Splunk / DynaTrace
 ├── 8. Troubleshooting
-|   ├── 8.1 Common Issues
-|   └── 8.2 Debugging
+│   ├── 8.1 Common Issues
+│   └── 8.2 Debugging
 └── 9. Guides & How‑tos
-    ├── 9.1 Documentatiomn
-    ├── 9.1 Advanced Usage Recipes
-    ├── 9.2 Performance Tuning
-    ├── 9.3 Troubleshooting / Known Issues
-    └── 9.4 FAQ (engineer & business)
+    ├── 9.1 Documentation
+    ├── 9.2 Advanced Usage Recipes
+    ├── 9.3 Performance Tuning
+    ├── 9.4 Troubleshooting / Known Issues
+    └── 9.5 FAQ (engineer & business)
 ```
 
 ## Wiki Page Spec Requirements
 
 **Every wiki page must include:**
 
-- **Title** matching the tree above.
-- **Audience** tag (Engineer, Business, All).
-- **Table of contents** if page >2 sections.
-- **Related pages** links at bottom for navigation.
-    
+- **Title** - matching the tree above.
+- **Audience** - tag (Engineer, Business, All).
+- **Table of contents** - if page >2 sections.
+- **Related pages** - links at bottom for navigation.
+
 
 **Page content types:**
 
-- **Concept** – Explain “what” and “why” (e.g., architecture overviews).
-- **Task** – Step‑by‑step “how‑to” (e.g., deployment runbook).
-- **Reference** – Lookup tables, API details, config matrices.
-    
+- **Concept** - Explain “what” and “why” (e.g., architecture overviews).
+- **Task** - Step‑by‑step “how‑to” (e.g., deployment runbook).
+- **Reference** - Lookup tables, API details, config matrices.
+
 
 ## Wiki Spec Compliance Checklist
 
